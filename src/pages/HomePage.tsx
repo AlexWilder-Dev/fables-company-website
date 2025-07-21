@@ -94,7 +94,6 @@ const HomePage: React.FC = () => {
                 name={venue.name}
                 location={venue.location}
                 slug={venue.slug}
-                logoUrl={venue.logoUrl}
               />
             </div>
           ))}
