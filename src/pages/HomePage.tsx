@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import VenueCard from '../components/VenueCard';
 import SeasonalCarousel from '../components/SeasonalCarousel';
