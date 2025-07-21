@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
 
@@ -7,10 +6,9 @@ interface VenueCardProps {
   name: string;
   location: string;
   slug: string;
-  logoUrl: string;
 }
 
-const VenueCard: React.FC<VenueCardProps> = ({ name, location, slug, logoUrl }) => {
+const VenueCard: React.FC<VenueCardProps> = ({ name, location, slug }) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
