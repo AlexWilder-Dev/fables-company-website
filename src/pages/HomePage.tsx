@@ -42,9 +42,9 @@ const HomePage: React.FC = () => {
     <div>
       <section className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden">
         <div className="absolute inset-0 bg-ink -z-10">
-          <img 
-            src="https://images.pexels.com/photos/3019019/pexels-photo-3019019.jpeg"
-            alt="Bacchus themed wine setting" 
+          <img
+            src="/Peter_Paul_Rubens_-_The_Four_Continents.png"
+            alt="Bacchus themed wine setting"
             className="w-full h-full object-cover opacity-40 transition-transform duration-10000 hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-ink/50 to-transparent"></div>
