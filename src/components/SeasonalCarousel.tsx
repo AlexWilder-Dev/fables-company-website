@@ -1,12 +1,15 @@
 import React, { useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Button from './Button';
+import CarouselModal from './CarouselModal';
 
 interface CarouselItem {
   id: number;
   title: string;
   description: string;
+  details: string;
   image: string;
+  bookingUrl: string;
 }
 
 const carouselItems: CarouselItem[] = [
@@ -14,30 +17,40 @@ const carouselItems: CarouselItem[] = [
     id: 1,
     title: "Spring's Awakening",
     description: "A light elderflower wine spritzer with notes of jasmine and honey.",
+    details: "Celebrate the return of warmer days with floral cocktails and live acoustic melodies.",
+    bookingUrl: "https://www.designmynight.com/london",
     image: "https://images.pexels.com/photos/1283219/pexels-photo-1283219.jpeg?auto=compress&cs=tinysrgb&w=1600"
   },
   {
     id: 2,
     title: "Midnight Tales",
     description: "A bold red wine mulled with winter spices and orange peel.",
+    details: "Gather by the fire for haunting folklore and spiced drinks until the clock strikes twelve.",
+    bookingUrl: "https://www.designmynight.com/london",
     image: "https://images.pexels.com/photos/2912108/pexels-photo-2912108.jpeg?auto=compress&cs=tinysrgb&w=1600"
   },
   {
     id: 3,
     title: "The Lost Chapter",
     description: "A mysterious gin cocktail with lavender, sage, and a twist of fate.",
+    details: "Unravel riddles over an evening of aromatic infusions and hidden stories.",
+    bookingUrl: "https://www.designmynight.com/london",
     image: "https://images.pexels.com/photos/5947019/pexels-photo-5947019.jpeg?auto=compress&cs=tinysrgb&w=1600"
   },
   {
     id: 4,
     title: "Quill's Secret",
     description: "An aged whiskey infused with vanilla and dark chocolate notes.",
+    details: "Our storytellers share legendary myths while you savour deep, smoky drams.",
+    bookingUrl: "https://www.designmynight.com/london",
     image: "https://images.pexels.com/photos/602750/pexels-photo-602750.jpeg?auto=compress&cs=tinysrgb&w=1600"
   },
   {
     id: 5,
     title: "Feathered Dreams",
     description: "A champagne cocktail with elderflower and gold leaf.",
+    details: "An elegant soirée above the city lights with effervescent bubbles and whimsical tales.",
+    bookingUrl: "https://www.designmynight.com/london",
     image: "https://images.pexels.com/photos/1123260/pexels-photo-1123260.jpeg?auto=compress&cs=tinysrgb&w=1600"
   }
 ];
@@ -45,8 +58,13 @@ const carouselItems: CarouselItem[] = [
 const SeasonalCarousel: React.FC = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedItem, setSelectedItem] = useState<CarouselItem | null>(null);
   const itemsPerView = 3;
   const totalItems = carouselItems.length;
+
+  const handleDiscover = (item: CarouselItem) => {
+    setSelectedItem(item);
+  };
 
   const scrollCarousel = (direction: 'left' | 'right') => {
     if (!carouselRef.current) return;
@@ -120,7 +138,10 @@ const SeasonalCarousel: React.FC = () => {
               <div className="p-8">
                 <h3 className="font-serif text-2xl mb-3">{item.title}</h3>
                 <p className="text-ink/80 mb-6">{item.description}</p>
-                <Button className="transform transition-all duration-300 hover:translate-x-2">
+                <Button
+                  className="transform transition-all duration-300 hover:translate-x-2"
+                  onClick={() => handleDiscover(item)}
+                >
                   Discover
                 </Button>
               </div>
@@ -138,22 +159,23 @@ const SeasonalCarousel: React.FC = () => {
       </div>
       
       <div className="flex justify-center space-x-4 mt-8 md:hidden">
-        <button 
-          onClick={() => scrollCarousel('left')} 
+        <button
+          onClick={() => scrollCarousel('left')}
           className="p-2 border border-sepia rounded-full hover:bg-sepia hover:text-parchment transition-all duration-300"
           aria-label="Previous item"
         >
           <ChevronLeft size={20} />
         </button>
         
-        <button 
-          onClick={() => scrollCarousel('right')} 
+        <button
+          onClick={() => scrollCarousel('right')}
           className="p-2 border border-sepia rounded-full hover:bg-sepia hover:text-parchment transition-all duration-300"
           aria-label="Next item"
         >
           <ChevronRight size={20} />
         </button>
       </div>
+      <CarouselModal item={selectedItem} onClose={() => setSelectedItem(null)} />
     </div>
   );
 };
